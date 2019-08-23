@@ -328,3 +328,9 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# Dataset
+VOCdevkit/
+
+# Networksetting
+cfg/darknet19_448.conv.23

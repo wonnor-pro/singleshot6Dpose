@@ -1,0 +1,7 @@
+train  = RR/RR/train.txt
+valid  = RR/RR/test.txt
+backup = backup/RR
+mesh = RR/RR/AD2080UL.ply
+tr_range = RR/RR/training_range.txt
+name = RR
+diam = 0.103
