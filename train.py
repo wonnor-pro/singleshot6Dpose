@@ -310,7 +310,7 @@ if __name__ == "__main__":
     bg_file_names = get_all_files('VOCdevkit/VOC2012/JPEGImages')
 
     # Train parameters
-    max_epochs    = 20 # max_batches*batch_size/nsamples+1
+    max_epochs    = 700 # max_batches*batch_size/nsamples+1
     use_cuda      = True
     seed          = int(time.time())
     eps           = 1e-5
