@@ -30,18 +30,18 @@ def calcAngularDistance(gt_rot, pr_rot):
     return np.rad2deg(np.arccos((trace-1.0)/2.0))
 
 def get_camera_intrinsic(): # do we need to change the camera intrinsic to our camera PR?
-    K = np.zeros((3, 3), dtype='float64')
-    K[0, 0], K[0, 2] = 2356.280953576225, 682.3281173706055
-    K[1, 1], K[1, 2] = 2356.280953576225, 522.8933753967285
-    K[2, 2] = 1.
-    return K
-    """original like this:
+    # K = np.zeros((3, 3), dtype='float64')
+    # K[0, 0], K[0, 2] = 2356.280953576225, 682.3281173706055
+    # K[1, 1], K[1, 2] = 2356.280953576225, 522.8933753967285
+    # K[2, 2] = 1.
+    # return K
+
     K = np.zeros((3, 3), dtype='float64')
     K[0, 0], K[0, 2] = 572.4114, 325.2611
     K[1, 1], K[1, 2] = 573.5704, 242.0489
     K[2, 2] = 1.
     return K
-    """
+
 
 def compute_projection(points_3D, transformation, internal_calibration):
     projections_2d = np.zeros((2, points_3D.shape[1]), dtype='float32')
