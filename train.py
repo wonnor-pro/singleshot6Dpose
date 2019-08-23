@@ -248,6 +248,7 @@ def test(epoch, niter):
     # Compute 2D projection, 6D pose and 5cm5degree scores
     px_threshold = 5
     acc = len(np.where(np.array(errs_2d) <= px_threshold)[0]) * 100. / (len(errs_2d)+eps)
+    print('lenth of np.where(errors_2d <= pxthres)[0]: ',len(np.where(np.array(errs_2d) <= px_threshold)[0]))
     acc3d = len(np.where(np.array(errs_3d) <= vx_threshold)[0]) * 100. / (len(errs_3d)+eps)
     acc5cm5deg = len(np.where((np.array(errs_trans) <= 0.05) & (np.array(errs_angle) <= 5))[0]) * 100. / (len(errs_trans)+eps)
     corner_acc = len(np.where(np.array(errs_corner2D) <= px_threshold)[0]) * 100. / (len(errs_corner2D)+eps)
