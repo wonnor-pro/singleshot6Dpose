@@ -66,7 +66,7 @@ def build_targets(pred_corners, target, anchors, num_anchors, num_classes, nH, n
             cur_confs  = torch.max(cur_confs, corner_confidences9(cur_pred_corners, cur_gt_corners)).view_as(conf_mask[b]) # some irrelevant areas are filtered, in the same grid multiple anchor boxes might exceed the threshold
         print('conf_mask[b]: {}'.format(conf_mask[b].shape))
         print('cur_gt_corners: {}'.format(cur_gt_corners.shape))
-        print('cur_confs>sil_thresh: {}'.format((cur_confs>sil_thresh).shape)
+        print('cur_confs>sil_thresh: {}'.format((cur_confs>sil_thresh).shape))
         conf_mask[b][(cur_confs>sil_thresh)] = 0
         print('=0 sucessfully --------------------')
     if seen < -1:#6400:
