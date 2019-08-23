@@ -70,6 +70,7 @@ def build_targets(pred_corners, target, anchors, num_anchors, num_classes, nH, n
         try:
             conf_mask[b][(cur_confs>sil_thresh)] = 0
         except:
+            print('error catched!!!!!! ------------->>')
             pass
         # print('=0 sucessfully --------------------')
     if seen < -1:#6400:
