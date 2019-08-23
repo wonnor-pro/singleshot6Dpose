@@ -64,7 +64,7 @@ def build_targets(pred_corners, target, anchors, num_anchors, num_classes, nH, n
 
             cur_gt_corners = torch.FloatTensor([gx0/nW,gy0/nH,gx1/nW,gy1/nH,gx2/nW,gy2/nH,gx3/nW,gy3/nH,gx4/nW,gy4/nH,gx5/nW,gy5/nH,gx6/nW,gy6/nH,gx7/nW,gy7/nH,gx8/nW,gy8/nH]).repeat(nAnchors,1).t() # 16 x nAnchors
             cur_confs  = torch.max(cur_confs, corner_confidences9(cur_pred_corners, cur_gt_corners)).view_as(conf_mask[b]) # some irrelevant areas are filtered, in the same grid multiple anchor boxes might exceed the threshold
-        conf_mask[b][cur_confs>sil_thresh].squeeze(0) = 0
+        conf_mask[b][(cur_confs>sil_thresh).squeeze(0)] = 0
     if seen < -1:#6400:
        tx0.fill_(0.5)
        ty0.fill_(0.5)
