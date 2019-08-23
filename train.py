@@ -91,7 +91,6 @@ def train(epoch):
         model.seen = model.seen + data.data.size(0)
         region_loss.seen = region_loss.seen + data.data.size(0)
         # Compute loss, grow an array of losses for saving later on
-        print("train time: {}".format(batch_idx))
         loss = region_loss(output, target)
         training_iters.append(epoch * math.ceil(len(train_loader.dataset) / float(batch_size) ) + niter)
         training_losses.append(convert2cpu(loss.data))
