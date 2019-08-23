@@ -67,7 +67,10 @@ def build_targets(pred_corners, target, anchors, num_anchors, num_classes, nH, n
         print('conf_mask[b]: {}'.format(conf_mask[b].shape))
         print('cur_gt_corners: {}'.format(cur_gt_corners.shape))
         print('cur_confs>sil_thresh: {}'.format((cur_confs>sil_thresh).shape))
-        conf_mask[b][(cur_confs>sil_thresh)] = 0
+        try:
+            conf_mask[b][(cur_confs>sil_thresh)] = 0
+        except:
+            pass
         print('=0 sucessfully --------------------')
     if seen < -1:#6400:
        tx0.fill_(0.5)
