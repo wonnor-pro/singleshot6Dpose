@@ -331,6 +331,7 @@ ASALocalRun/
 
 # Dataset
 VOCdevkit/
+LINEMOD/
 
 # Networksetting
 cfg/darknet19_448.conv.23
