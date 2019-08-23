@@ -323,8 +323,8 @@ if __name__ == "__main__":
     conf_thresh   = 0.1
     nms_thresh    = 0.4
     iou_thresh    = 0.5
-    im_width      = 640
-    im_height     = 480 
+    im_width      = 416 # was 640
+    im_height     = 416 # was 480
 
     # Specify which gpus to use
     torch.manual_seed(seed)
