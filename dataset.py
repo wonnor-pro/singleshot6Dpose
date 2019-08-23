@@ -85,7 +85,6 @@ class listDataset(Dataset):
             else: 
                width = (random.randint(0,19) + 7)*self.cell_size
                self.shape = (width, width)
-        print('shape:',self.shape)
 
         if self.train:
             # If you are going to train, decide on how much data augmentation you are going to apply
