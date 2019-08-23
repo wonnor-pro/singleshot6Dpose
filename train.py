@@ -179,6 +179,7 @@ def test(epoch, niter):
             truths  = target[i].view(-1, 21)
             # Get how many objects are present in the scene
             num_gts = truths_length(truths)
+            print('no. of objects present in the scene: ', num_gts)
 
             # Iterate through each ground-truth object
             for k in range(num_gts):
@@ -224,11 +225,15 @@ def test(epoch, niter):
                 # Compute pixel error
                 Rt_gt        = np.concatenate((R_gt, t_gt), axis=1)
                 Rt_pr        = np.concatenate((R_pr, t_pr), axis=1)
-                proj_2d_gt   = compute_projection(vertices, Rt_gt, internal_calibration) 
-                proj_2d_pred = compute_projection(vertices, Rt_pr, internal_calibration) 
+                proj_2d_gt   = compute_projection(vertices, Rt_gt, internal_calibration)
+                print('proj_2d_gt: ', proj_2d_gt) 
+                proj_2d_pred = compute_projection(vertices, Rt_pr, internal_calibration)
+                print('proj_2d_pred: ', proj_2d_pred) 
                 norm         = np.linalg.norm(proj_2d_gt - proj_2d_pred, axis=0)
                 pixel_dist   = np.mean(norm)
+                print('pixel_dist: ', pixel_dist)
                 errs_2d.append(pixel_dist)
+                
 
                 # Compute 3D distances
                 transform_3d_gt   = compute_transformation(vertices, Rt_gt) 
@@ -346,8 +351,8 @@ if __name__ == "__main__":
     processed_batches = model.seen//batch_size
     init_width        = model.width
     init_height       = model.height
-    test_width        = 672
-    test_height       = 672
+    test_width        = 416 # was 672
+    test_height       = 416 # was 672
     init_epoch        = model.seen//nsamples 
 
     # Variable to save
