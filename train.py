@@ -327,8 +327,8 @@ if __name__ == "__main__":
     conf_thresh   = 0.1
     nms_thresh    = 0.4
     iou_thresh    = 0.5
-    im_width      = 640 # was 640
-    im_height     = 480 # was 480
+    im_width      = 416 # was 640
+    im_height     = 416 # was 480
 
     # Specify which gpus to use
     torch.manual_seed(seed)
@@ -350,8 +350,8 @@ if __name__ == "__main__":
     processed_batches = model.seen//batch_size
     init_width        = model.width
     init_height       = model.height
-    test_width        = 672 # was 672
-    test_height       = 672 # was 672
+    test_width        = 416 # was 672
+    test_height       = 416 # was 672
     init_epoch        = model.seen//nsamples 
 
     # Variable to save
