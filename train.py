@@ -250,7 +250,7 @@ def test(epoch, niter):
         t5 = time.time()
 
     # Compute 2D projection, 6D pose and 5cm5degree scores
-    px_threshold = 20 # originally 5
+    px_threshold = 100 # originally 5
     acc = len(np.where(np.array(errs_2d) <= px_threshold)[0]) * 100. / (len(errs_2d)+eps)
     print('lenth of np.where(errors_2d <= pxthres)[0]: ',len(np.where(np.array(errs_2d) <= px_threshold)[0]))
     acc3d = len(np.where(np.array(errs_3d) <= vx_threshold)[0]) * 100. / (len(errs_3d)+eps)
