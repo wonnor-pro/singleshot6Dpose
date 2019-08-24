@@ -36,8 +36,8 @@ def valid(datacfg, cfgfile, weightfile, outfile):
     prefix       = 'results'
     seed         = int(time.time())
     gpus         = '0'     # Specify which gpus to use
-    test_width   = 544
-    test_height  = 544
+    test_width   = 416 #originally 544
+    test_height  = 416 #originally 544
     torch.manual_seed(seed)
     use_cuda = True
     if use_cuda:
