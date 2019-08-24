@@ -364,7 +364,7 @@ if __name__ == "__main__":
     testing_errors_pixel    = []
     testing_accuracies      = []
 
-    # Get the intrinsic camerea matrix, mesh, vertices and corners of the model
+    # Get the intrinsic camera matrix, mesh, vertices and corners of the model
     mesh                 = MeshPly(meshname)
     vertices             = np.c_[np.array(mesh.vertices), np.ones((len(mesh.vertices), 1))].transpose()
     corners3D            = get_3D_corners(vertices)
