@@ -420,4 +420,5 @@ if __name__ == "__main__":
                     logging('best model so far!')
                     logging('save weights to %s/model.weights' % (backupdir))
                     model.save_weights('%s/model.weights' % (backupdir))
+                    print('-------model saved successfully!--------')
         shutil.copy2('%s/model.weights' % (backupdir), '%s/model_backup.weights' % (backupdir))
