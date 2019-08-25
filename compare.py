@@ -17,7 +17,7 @@ def makedirs(path):
     if not os.path.exists( path ):
         os.makedirs( path )
 
-def valid_compare(datacfg, cfgfile, weightfile, outfile):
+def valid(datacfg, cfgfile, weightfile, outfile):
     def truths_length(truths):
         for i in range(50):
             if truths[i][1] == 0:
@@ -265,10 +265,10 @@ if __name__ == '__main__':
         weightfile2 = sys.argv[4]
         outfile1 = 'comp4_det_test_1'
         outfile2 = 'comp4_det_test_2'
-        print('-----------------results for testing weightfile1-----------------')
+        print('-----------------results for testing {}-----------------'.format(weightfile1))
         valid(datacfg, cfgfile, weightfile1, outfile)
         print('-----------------------------------------------------------------\n')
-        print('-----------------results for testing weightfile2-----------------')
+        print('-----------------results for testing {}-----------------'.format(weightfile1))
         valid(datacfg, cfgfile, weightfile2, outfile)
         print('-----------------------------------------------------------------\n')
     else:
