@@ -266,10 +266,10 @@ if __name__ == '__main__':
         outfile1 = 'comp4_det_test_1'
         outfile2 = 'comp4_det_test_2'
         print('-----------------results for testing {}-----------------'.format(weightfile1))
-        valid(datacfg, cfgfile, weightfile1, outfile)
+        valid(datacfg, cfgfile, weightfile1, outfile1)
         print('-----------------------------------------------------------------\n')
         print('-----------------results for testing {}-----------------'.format(weightfile1))
-        valid(datacfg, cfgfile, weightfile2, outfile)
+        valid(datacfg, cfgfile, weightfile2, outfile2)
         print('-----------------------------------------------------------------\n')
     else:
         print('Usage:')
