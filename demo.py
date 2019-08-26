@@ -295,7 +295,7 @@ def valid(datacfg, cfgfile, weightfile, outfile):
         predfile = backupdir + '/predictions_linemod_' + name +  '.mat'
         scipy.io.savemat(predfile, {'R_gts': gts_rot, 't_gts':gts_trans, 'corner_gts': gts_corners2D, 'R_prs': preds_rot, 't_prs':preds_trans, 'corner_prs': preds_corners2D})
 
-    with open('test_results', 'a') as f:
+    with open('test/{}/test_report.txt'.format(weightfile), 'a') as f:
         f.write('Results of {}\n'.format(name))
         f.write('-----------------------------------\n')
         f.write('  tensor to cuda : %f\n' % (t2 - t1))
@@ -318,6 +318,7 @@ if __name__ == '__main__':
         weightfile = sys.argv[3]
         outfile = 'comp4_det_test_'
         makedirs('test/{}/demo'.format(weightfile))
+        makedirs('test/{}/result'.format(weightfile))
         valid(datacfg, cfgfile, weightfile, outfile)
     else:
         print('Usage:')
