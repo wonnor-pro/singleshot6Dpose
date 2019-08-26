@@ -208,7 +208,10 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                 R_pr, t_pr = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_pr, np.array(internal_calibration, dtype='float32'))
 
                 demo_path = '/test/demo/demo_' + valid_files[count][-8:-3] + 'png'
+                print(demo_path)
                 img_path = valid_files[count]
+                print(img_path, os.path.exists(img_path))
+
                 img = cv2.imread(img_path)
                 save_demo_img(img, corners2D_pr, demo_path)
 
