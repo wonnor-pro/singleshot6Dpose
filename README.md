@@ -1,4 +1,4 @@
-#Yolo-6D Training Log
+# Yolo-6D Training Log
 
 ## Yolo-6D
 
@@ -115,30 +115,28 @@ If you use this code, please cite the following
 
 Following the dataset and instruction provided by RR, we confirm that 700 images in the format of png are to be used, labels are given in the form of pose matrix and camera calibration file.
 
-$Pose \, \, Matrix$
-$$
-\begin{bmatrix}
-r_{11} & r_{12} & r_{13} & t_1\\
-r_{21} & r_{22} & r_{23} & t_2\\
-r_{31} & r_{32} & r_{33} & t_3\\
-0 & 0 & 0 & 1\\
-\end{bmatrix}
-$$
-$Rotation \, \,Matrix$
-$$
-\begin{bmatrix}
-r_{11} & r_{12} & r_{13}\\
-r_{21} & r_{22} & r_{23}\\
-r_{31} & r_{32} & r_{33}\\
+Pose Matrix
 
-\end{bmatrix}
-$$
-$Translation \, \, Vectore$
-$$
-\begin{bmatrix}
-t_1\\t_2\\t_3
-\end{bmatrix}
-$$
+
+r_{11} r_{12} r_{13} t_1
+r_{21} r_{22} r_{23} t_2
+r_{31} r_{32} r_{33} t_3
+0      0      0      1
+
+Rotation Matrix
+
+
+r_{11} r_{12} r_{13}
+r_{21} r_{22} r_{23}
+r_{31} r_{32} r_{33}
+
+Translation Vectore
+
+t_1
+t_2
+t_3
+
+
 **Links Related:**
 
 [*Expressing Pose: rotation and translation matrices and vectors* ](http://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/MARBLE/high/pose/express.htm)
@@ -190,23 +188,23 @@ In both functions, the parameters we use:
 
 - `objectPoints`	points to be projected
 
-  numpy array (9, 3)	$$[[x_0, y_0, z_0], [x_1, y_2, z_3], \dots , [x_8, y_8, z_8]]$$
+  numpy array (9, 3)	[[x_0, y_0, z_0], [x_1, y_2, z_3], ... , [x_8, y_8, z_8]]
 
 - `rvec`	roration vector
 
-  numpy array (3, 3)	$[[r_{11},r_{12},r_{13}],[r_{21},r_{22},r_{23}],[r_{31},r_{32},r_{33}]]$
+  numpy array (3, 3)	[[r_{11},r_{12},r_{13}],[r_{21},r_{22},r_{23}],[r_{31},r_{32},r_{33}]]
 
 - `tvec`	translation vector
 
-  numpy array (3)	$[t_1, t_2, t_3]$
+  numpy array (3)	[t_1, t_2, t_3]
 
 - `cameraMatrix`	camera matrix
 
-  numpy array (3, 3)	$[[c_{11},c_{12},c_{13}],[c_{21},c_{22},c_{23}],[c_{31},c_{32},c_{33}]]$
+  numpy array (3, 3)	[[c_{11},c_{12},c_{13}],[c_{21},c_{22},c_{23}],[c_{31},c_{32},c_{33}]]
 
 - `imagePoints`	projections on the image plane
 
-  numpy array (9, 1, 2)	$[[[x_0,y_o]],[[x_1,y_1]],\dots,[[x_8,y_8]]]$
+  numpy array (9, 1, 2)	[[[x_0,y_o]],[[x_1,y_1]], ... ,[[x_8,y_8]]]
 
 ---
 
@@ -244,7 +242,7 @@ In both functions, the parameters we use:
 
 - `objectPoints` were corner coordinates obtained from `AD2080UL.ply` (CAD model)
 
-  This gives us the $\min$ and $\max$ of $x,y,z$ coordinates:
+  This gives us the `min` and `max` of *x,y,z* coordinates:
 
    ```
   min_coordinates, x:-0.03880799934267998, y:-0.01425000000745058, z:-0.02686610072851181
@@ -276,19 +274,19 @@ In both functions, the parameters we use:
   0.000000000000000000e+00 0.000000000000000000e+00 1.000000000000000000e+00 0.000000000000000000e+00
   ```
 
-  We only take top right $$3\times 3$$ matrix.
+  We only take top right 3x3 matrix.
 
 ---
 
 ### Sample photo generated
 
-$1280\times1024$ with lines marked
+1280*1024 with lines marked
 
 <div align=center>
   <img width=400 src="./md_source/sample.png" >
 </div>
 
-$416\times416$ with lines marks
+416 * 416 with lines marked
 
 <div align=center>
   <img width=200 src="./md_source/sample_small.png" >
