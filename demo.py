@@ -5,6 +5,7 @@ from torch.autograd import Variable
 from torchvision import datasets, transforms
 import scipy.io
 import warnings
+import cv2
 warnings.filterwarnings("ignore")
 
 from darknet import Darknet
@@ -16,6 +17,34 @@ from MeshPly import MeshPly
 def makedirs(path):
     if not os.path.exists( path ):
         os.makedirs( path )
+
+def save_demo_img(img, projectpts, file_path):
+
+    vertices = []
+    for i in range(9):
+        x = projectpts[2i+1]
+        y = projectpts[2i+2]
+        coordinates = (int(x),int(y))
+        vertices.append(coordinates)
+        cv2.circle(img, coordinates, 1, (0, 255, 255), -1)
+
+    cv2.line(img, vertices[1], vertices[2], (0, 255, 0), 2)
+    cv2.line(img, vertices[1], vertices[3], (0, 255, 0), 2)
+    cv2.line(img, vertices[1], vertices[5], (0, 255, 0), 2)
+    cv2.line(img, vertices[2], vertices[6], (0, 0, 255), 2)
+    cv2.line(img, vertices[2], vertices[4], (0, 0, 255), 2)
+    cv2.line(img, vertices[3], vertices[4], (0, 255, 0), 2)
+    cv2.line(img, vertices[3], vertices[7], (0, 255, 0), 2)
+    cv2.line(img, vertices[4], vertices[8], (0, 0, 255), 2)
+    cv2.line(img, vertices[5], vertices[6], (0, 255, 0), 2)
+    cv2.line(img, vertices[5], vertices[7], (0, 255, 0), 2)
+    cv2.line(img, vertices[6], vertices[8], (0, 0, 255), 2)
+    cv2.line(img, vertices[7], vertices[8], (0, 255, 0), 2)
+
+    cv2.imwrite(file_path, img)
+
+    return img
+
 
 def valid(datacfg, cfgfile, weightfile, outfile):
     def truths_length(truths):
@@ -43,7 +72,7 @@ def valid(datacfg, cfgfile, weightfile, outfile):
     if use_cuda:
         os.environ['CUDA_VISIBLE_DEVICES'] = gpus
         torch.cuda.manual_seed(seed)
-    save            = False
+    save            = True
     testtime        = True
     use_cuda        = True
     num_classes     = 1
@@ -190,6 +219,11 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                     np.savetxt(backupdir + '/test/pr/t_' + valid_files[count][-8:-3] + 'txt', np.array(t_pr, dtype='float32'))
                     np.savetxt(backupdir + '/test/gt/corners_' + valid_files[count][-8:-3] + 'txt', np.array(corners2D_gt, dtype='float32'))
                     np.savetxt(backupdir + '/test/pr/corners_' + valid_files[count][-8:-3] + 'txt', np.array(corners2D_pr, dtype='float32'))
+
+                    demo_path = backupdir + '/test/demo/demo_' + valid_files[count][-8:-3] + 'png'
+                    img_path = valid_files[count]
+                    img = cv2.imread(img_path)
+                    save_demo_img(img, corners2D_pr, demo_path)
                 
                 # Compute translation error
                 trans_dist   = np.sqrt(np.sum(np.square(t_gt - t_pr)))
@@ -258,19 +292,12 @@ def valid(datacfg, cfgfile, weightfile, outfile):
 
 if __name__ == '__main__':
     import sys
-    if len(sys.argv) == 5:
+    if len(sys.argv) == 4:
         datacfg = sys.argv[1]
         cfgfile = sys.argv[2]
-        weightfile1 = sys.argv[3]
-        weightfile2 = sys.argv[4]
-        outfile1 = 'comp4_det_test_1'
-        outfile2 = 'comp4_det_test_2'
-        print('-----------------results for testing {}-----------------'.format(weightfile1))
-        valid(datacfg, cfgfile, weightfile1, outfile1)
-        print('-----------------------------------------------------------------\n')
-        print('-----------------results for testing {}-----------------'.format(weightfile1))
-        valid(datacfg, cfgfile, weightfile2, outfile2)
-        print('-----------------------------------------------------------------\n')
+        weightfile = sys.argv[3]
+        outfile = 'comp4_det_test_'
+        valid(datacfg, cfgfile, weightfile, outfile)
     else:
         print('Usage:')
-        print(' python valid.py datacfg cfgfile weightfile1 weightfile2')
+        print(' python valid.py datacfg cfgfile weightfile')
