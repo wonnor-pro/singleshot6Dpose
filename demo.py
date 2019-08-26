@@ -174,6 +174,7 @@ def valid(datacfg, cfgfile, weightfile, outfile):
             # Get how many object are present in the scene
             num_gts = truths_length(truths)
 
+
              # Iterate through each ground-truth object
             for k in range(num_gts):
                 box_gt        = [truths[k][1], truths[k][2], truths[k][3], truths[k][4], truths[k][5], truths[k][6], 
@@ -207,7 +208,7 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                 R_gt, t_gt = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_gt, np.array(internal_calibration, dtype='float32'))
                 R_pr, t_pr = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_pr, np.array(internal_calibration, dtype='float32'))
 
-                demo_path = '/test/demo/demo_' + valid_files[count][-8:-3] + 'png'
+                demo_path = 'test/demo/demo_' + valid_files[count][-8:-3] + 'png'
                 print(demo_path)
                 img_path = valid_files[count]
                 print(img_path, os.path.exists(img_path))
@@ -300,6 +301,7 @@ if __name__ == '__main__':
         cfgfile = sys.argv[2]
         weightfile = sys.argv[3]
         outfile = 'comp4_det_test_'
+        makedirs('test/demo')
         valid(datacfg, cfgfile, weightfile, outfile)
     else:
         print('Usage:')
