@@ -307,11 +307,11 @@ def valid(datacfg, cfgfile, weightfile, outfile):
         f.write('            eval : %f\n' % (t5 - t4))
         f.write('           total : %f\n' % (t5 - t1))
         f.write('-----------------------------------\n')
-        f.write('   Acc using {} px 2D Projection = {:.2f}%\n'.format(px_threshold, acc))
-        f.write('   Acc using 10% threshold - {} vx 3D Transformation = {:.2f}%\n'.format(diam * 0.1, acc3d10))
-        f.write('   Acc using 5 cm 5 degree metric = {:.2f}%\n'.format(acc5cm5deg))
-        f.write("   Mean 2D pixel error is %f, Mean vertex error is %f, mean corner error is %f\n" % (mean_err_2d, np.mean(errs_3d), mean_corner_err_2d))
-        f.write('   Translation error: %f m, angle error: %f degree, pixel error: % f pix\n' % (testing_error_trans/nts, testing_error_angle/nts, testing_error_pixel/nts))
+        f.write('[{:.2f}%]Acc using {} px 2D Projection = \n'.format(acc, px_threshold))
+        f.write('[{:.2f}%]Acc using 10% threshold - {} vx 3D Transformation\n'.format(acc3d10, diam * 0.1))
+        f.write('[{:.2f}%]Acc using 5 cm 5 degree metric\n'.format(acc5cm5deg))
+        f.write("Mean 2D pixel error is %f, Mean vertex error is %f, mean corner error is %f\n" % (mean_err_2d, np.mean(errs_3d), mean_corner_err_2d))
+        f.write('Translation error: %f m, angle error: %f degree, pixel error: % f pix\n' % (testing_error_trans/nts, testing_error_angle/nts, testing_error_pixel/nts))
 
 if __name__ == '__main__':
     import sys
