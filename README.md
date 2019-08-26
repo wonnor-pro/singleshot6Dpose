@@ -16,10 +16,10 @@ Training inputs:
 
   - class label
 
-  - $x_{0}$ and $y_0$  (x,y coordinates of the centroid)
-  - $x_{i}$ and $y_i$  (8 pairs of x,y coordinates of the corners)
-  - $x$ range
-  - $y$ range
+  - x_0 and y_0  (x,y coordinates of the centroid)
+  - x_i and y_i  (8 pairs of x,y coordinates of the corners)
+  - x range
+  - y range
 
 ---
 
@@ -116,25 +116,20 @@ If you use this code, please cite the following
 Following the dataset and instruction provided by RR, we confirm that 700 images in the format of png are to be used, labels are given in the form of pose matrix and camera calibration file.
 
 Pose Matrix
-
-
-r_{11} r_{12} r_{13} t_1
-r_{21} r_{22} r_{23} t_2
-r_{31} r_{32} r_{33} t_3
-0      0      0      1
+<div align=center>
+  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix} r_{11} & r_{12} & r_{13} & t_1\\ r_{21} & r_{22} & r_{23} & t_2\\ r_{31} & r_{32} & r_{33} & t_3\\ 0 & 0 & 0 & 1\\ \end{bmatrix} " /> 
+</div>
 
 Rotation Matrix
 
-
-r_{11} r_{12} r_{13}
-r_{21} r_{22} r_{23}
-r_{31} r_{32} r_{33}
+<div align=center>
+  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix} r_{11} & r_{12} & r_{13}\\ r_{21} & r_{22} & r_{23}\\ r_{31} & r_{32} & r_{33}\\ \end{bmatrix}" /> 
+</div>>
 
 Translation Vectore
-
-t_1
-t_2
-t_3
+<div align=center>
+  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix} t_1\\t_2\\t_3 \end{bmatrix}" /> 
+</div>
 
 
 **Links Related:**
@@ -210,35 +205,6 @@ In both functions, the parameters we use:
 
 ### File path
 
-```
-- RR_Data_Gen
-	- Load_Data.py
-	- Split_Data.py
-	- utils.py
-- RR
-	- AI_CV_DATA
-		- 姿态识别
-			- AD2080UL
-				- CAD_Model
-					- AD2080UL.ply
-				- IRImage
-					- RightImage
-						- 0.png ~ 699.png
-				- Pose(Label)
-					- Allpose.txt
-				- Calibration
-					- PR.txt
-	- Training_Data
-		- DemoImages
-			- 000000.png ~ 000699.png
-		- JPEGImages
-			- 000000.jpg ~ 000699.jpg
-		- labels
-			- 000000.txt ~ 000699.txt
-		- object.txt
-		- train.txt
-		- text.txt
-```
 
 - `objectPoints` were corner coordinates obtained from `AD2080UL.ply` (CAD model)
 
@@ -280,7 +246,7 @@ In both functions, the parameters we use:
 
 ### Sample photo generated
 
-1280*1024 with lines marked
+1280 * 1024 with lines marked
 
 <div align=center>
   <img width=400 src="./md_source/sample.png" >
