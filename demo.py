@@ -20,28 +20,30 @@ def makedirs(path):
 
 def save_demo_img(img, projectpts, file_path):
 
-    vertices = []
-    for i in range(9):
-        x = projectpts[0][i]
-        y = projectpts[1][i]
-        coordinates = (int(x),int(y))
-        vertices.append(coordinates)
-        cv2.circle(img, coordinates, 1, (0, 255, 255), -1)
-
-    cv2.line(img, vertices[1], vertices[2], (0, 255, 0), 2)
-    cv2.line(img, vertices[1], vertices[3], (0, 255, 0), 2)
-    cv2.line(img, vertices[1], vertices[5], (0, 255, 0), 2)
-    cv2.line(img, vertices[2], vertices[6], (0, 0, 255), 2)
-    cv2.line(img, vertices[2], vertices[4], (0, 0, 255), 2)
-    cv2.line(img, vertices[3], vertices[4], (0, 255, 0), 2)
-    cv2.line(img, vertices[3], vertices[7], (0, 255, 0), 2)
-    cv2.line(img, vertices[4], vertices[8], (0, 0, 255), 2)
-    cv2.line(img, vertices[5], vertices[6], (0, 255, 0), 2)
-    cv2.line(img, vertices[5], vertices[7], (0, 255, 0), 2)
-    cv2.line(img, vertices[6], vertices[8], (0, 0, 255), 2)
-    cv2.line(img, vertices[7], vertices[8], (0, 255, 0), 2)
-
-    cv2.imwrite(file_path, img)
+    print(projectpts)
+    print(projectpts.shape())
+    # vertices = []
+    # for i in range(9):
+    #     x = projectpts[0][i]
+    #     y = projectpts[1][i]
+    #     coordinates = (int(x),int(y))
+    #     vertices.append(coordinates)
+    #     cv2.circle(img, coordinates, 1, (0, 255, 255), -1)
+    #
+    # cv2.line(img, vertices[1], vertices[2], (0, 255, 0), 2)
+    # cv2.line(img, vertices[1], vertices[3], (0, 255, 0), 2)
+    # cv2.line(img, vertices[1], vertices[5], (0, 255, 0), 2)
+    # cv2.line(img, vertices[2], vertices[6], (0, 0, 255), 2)
+    # cv2.line(img, vertices[2], vertices[4], (0, 0, 255), 2)
+    # cv2.line(img, vertices[3], vertices[4], (0, 255, 0), 2)
+    # cv2.line(img, vertices[3], vertices[7], (0, 255, 0), 2)
+    # cv2.line(img, vertices[4], vertices[8], (0, 0, 255), 2)
+    # cv2.line(img, vertices[5], vertices[6], (0, 255, 0), 2)
+    # cv2.line(img, vertices[5], vertices[7], (0, 255, 0), 2)
+    # cv2.line(img, vertices[6], vertices[8], (0, 0, 255), 2)
+    # cv2.line(img, vertices[7], vertices[8], (0, 255, 0), 2)
+    #
+    # cv2.imwrite(file_path, img)
 
     return img
 
