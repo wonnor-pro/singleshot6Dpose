@@ -207,6 +207,11 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                 R_gt, t_gt = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_gt, np.array(internal_calibration, dtype='float32'))
                 R_pr, t_pr = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_pr, np.array(internal_calibration, dtype='float32'))
 
+                demo_path = '/test/demo/demo_' + valid_files[count][-8:-3] + 'png'
+                img_path = valid_files[count]
+                img = cv2.imread(img_path)
+                save_demo_img(img, corners2D_pr, demo_path)
+
                 if save:
                     preds_trans.append(t_pr)
                     gts_trans.append(t_gt)
@@ -219,11 +224,6 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                     np.savetxt(backupdir + '/test/pr/t_' + valid_files[count][-8:-3] + 'txt', np.array(t_pr, dtype='float32'))
                     np.savetxt(backupdir + '/test/gt/corners_' + valid_files[count][-8:-3] + 'txt', np.array(corners2D_gt, dtype='float32'))
                     np.savetxt(backupdir + '/test/pr/corners_' + valid_files[count][-8:-3] + 'txt', np.array(corners2D_pr, dtype='float32'))
-
-                    demo_path = backupdir + '/test/demo/demo_' + valid_files[count][-8:-3] + 'png'
-                    img_path = valid_files[count]
-                    img = cv2.imread(img_path)
-                    save_demo_img(img, corners2D_pr, demo_path)
                 
                 # Compute translation error
                 trans_dist   = np.sqrt(np.sum(np.square(t_gt - t_pr)))
