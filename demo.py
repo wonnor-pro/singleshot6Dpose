@@ -212,8 +212,8 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                 print(img_path, os.path.exists(img_path), demo_path, 'saved.')
 
                 img = cv2.imread(img_path)
-                img = draw_demo_img(img, corners2D_pr, demo_path, (0, 255, 0))
-                img = draw_demo_img(img, corners2D_gt, demo_path, (0, 0, 255))
+                img = draw_demo_img(img, corners2D_pr, (0, 255, 0))
+                img = draw_demo_img(img, corners2D_gt, (0, 0, 255))
 
                 cv2.imwrite(demo_path, img)
 
