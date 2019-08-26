@@ -29,18 +29,18 @@ def draw_demo_img(img, projectpts, color = (0, 255, 0)):
         cv2.circle(img, coordinates, 1, (0, 255, 255), -1)
 
 
-    cv2.line(img, vertices[1], vertices[2], color, 1)
-    cv2.line(img, vertices[1], vertices[3], color, 1)
-    cv2.line(img, vertices[1], vertices[5], color, 1)
-    cv2.line(img, vertices[2], vertices[6], color, 1)
-    cv2.line(img, vertices[2], vertices[4], color, 1)
-    cv2.line(img, vertices[3], vertices[4], color, 1)
-    cv2.line(img, vertices[3], vertices[7], color, 1)
-    cv2.line(img, vertices[4], vertices[8], color, 1)
-    cv2.line(img, vertices[5], vertices[6], color, 1)
-    cv2.line(img, vertices[5], vertices[7], color, 1)
-    cv2.line(img, vertices[6], vertices[8], color, 1)
-    cv2.line(img, vertices[7], vertices[8], color, 1)
+    cv2.line(img, vertices[1], vertices[2], color, 2)
+    cv2.line(img, vertices[1], vertices[3], color, 2)
+    cv2.line(img, vertices[1], vertices[5], color, 2)
+    cv2.line(img, vertices[2], vertices[6], color, 2)
+    cv2.line(img, vertices[2], vertices[4], color, 2)
+    cv2.line(img, vertices[3], vertices[4], color, 2)
+    cv2.line(img, vertices[3], vertices[7], color, 2)
+    cv2.line(img, vertices[4], vertices[8], color, 2)
+    cv2.line(img, vertices[5], vertices[6], color, 2)
+    cv2.line(img, vertices[5], vertices[7], color, 2)
+    cv2.line(img, vertices[6], vertices[8], color, 2)
+    cv2.line(img, vertices[7], vertices[8], color, 2)
 
     return img
 
