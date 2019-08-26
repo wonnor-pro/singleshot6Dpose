@@ -207,14 +207,17 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                 R_gt, t_gt = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_gt, np.array(internal_calibration, dtype='float32'))
                 R_pr, t_pr = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_pr, np.array(internal_calibration, dtype='float32'))
 
-                demo_path = 'test/demo/demo_' + valid_files[count][-8:-3] + 'png'
+                demo_path = 'test/{}/demo/demo_'.format(weightfile) + valid_files[count][-8:-3] + 'png'
+                result_path = 'test/{}/result/result_'.format(weightfile) + valid_files[count][-8:-3] + 'png'
                 img_path = valid_files[count]
                 print(img_path, os.path.exists(img_path), demo_path, 'saved.')
 
                 img = cv2.imread(img_path)
-                img = draw_demo_img(img, corners2D_pr, (0, 255, 0))
-                img = draw_demo_img(img, corners2D_gt, (0, 0, 255))
 
+                img = draw_demo_img(img, corners2D_pr, (0, 255, 0))
+                cv2.imwrite(result_path , img)
+
+                img = draw_demo_img(img, corners2D_gt, (0, 0, 255))
                 cv2.imwrite(demo_path, img)
 
                 if save:
