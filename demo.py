@@ -18,7 +18,7 @@ def makedirs(path):
     if not os.path.exists( path ):
         os.makedirs( path )
 
-def save_demo_img(img, projectpts, file_path):
+def draw_demo_img(img, projectpts, color = (0, 255, 0)):
 
     vertices = []
     for i in range(9):
@@ -28,20 +28,19 @@ def save_demo_img(img, projectpts, file_path):
         vertices.append(coordinates)
         cv2.circle(img, coordinates, 1, (0, 255, 255), -1)
 
-    cv2.line(img, vertices[1], vertices[2], (0, 255, 0), 2)
-    cv2.line(img, vertices[1], vertices[3], (0, 255, 0), 2)
-    cv2.line(img, vertices[1], vertices[5], (0, 255, 0), 2)
-    cv2.line(img, vertices[2], vertices[6], (0, 0, 255), 2)
-    cv2.line(img, vertices[2], vertices[4], (0, 0, 255), 2)
-    cv2.line(img, vertices[3], vertices[4], (0, 255, 0), 2)
-    cv2.line(img, vertices[3], vertices[7], (0, 255, 0), 2)
-    cv2.line(img, vertices[4], vertices[8], (0, 0, 255), 2)
-    cv2.line(img, vertices[5], vertices[6], (0, 255, 0), 2)
-    cv2.line(img, vertices[5], vertices[7], (0, 255, 0), 2)
-    cv2.line(img, vertices[6], vertices[8], (0, 0, 255), 2)
-    cv2.line(img, vertices[7], vertices[8], (0, 255, 0), 2)
 
-    cv2.imwrite(file_path, img)
+    cv2.line(img, vertices[1], vertices[2], color, 1)
+    cv2.line(img, vertices[1], vertices[3], color, 1)
+    cv2.line(img, vertices[1], vertices[5], color, 1)
+    cv2.line(img, vertices[2], vertices[6], color, 1)
+    cv2.line(img, vertices[2], vertices[4], color, 1)
+    cv2.line(img, vertices[3], vertices[4], color, 1)
+    cv2.line(img, vertices[3], vertices[7], color, 1)
+    cv2.line(img, vertices[4], vertices[8], color, 1)
+    cv2.line(img, vertices[5], vertices[6], color, 1)
+    cv2.line(img, vertices[5], vertices[7], color, 1)
+    cv2.line(img, vertices[6], vertices[8], color, 1)
+    cv2.line(img, vertices[7], vertices[8], color, 1)
 
     return img
 
@@ -209,12 +208,14 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                 R_pr, t_pr = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_pr, np.array(internal_calibration, dtype='float32'))
 
                 demo_path = 'test/demo/demo_' + valid_files[count][-8:-3] + 'png'
-                print(demo_path)
                 img_path = valid_files[count]
-                print(img_path, os.path.exists(img_path))
+                print(img_path, os.path.exists(img_path), demo_path, 'saved.')
 
                 img = cv2.imread(img_path)
-                save_demo_img(img, corners2D_pr, demo_path)
+                img = draw_demo_img(img, corners2D_pr, demo_path, (0, 255, 0))
+                img = draw_demo_img(img, corners2D_gt, demo_path, (0, 0, 255))
+
+                cv2.imwrite(demo_path, img)
 
                 if save:
                     preds_trans.append(t_pr)
