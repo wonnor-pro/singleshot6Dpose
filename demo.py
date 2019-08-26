@@ -22,8 +22,8 @@ def save_demo_img(img, projectpts, file_path):
 
     vertices = []
     for i in range(9):
-        x = projectpts[2i+1]
-        y = projectpts[2i+2]
+        x = projectpts[2*i+1]
+        y = projectpts[2*i+2]
         coordinates = (int(x),int(y))
         vertices.append(coordinates)
         cv2.circle(img, coordinates, 1, (0, 255, 255), -1)
