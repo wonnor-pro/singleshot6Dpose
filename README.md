@@ -117,18 +117,18 @@ Following the dataset and instruction provided by RR, we confirm that 700 images
 
 Pose Matrix
 <div align=center>
-  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix} r_{11} & r_{12} & r_{13} & t_1\\ r_{21} & r_{22} & r_{23} & t_2\\ r_{31} & r_{32} & r_{33} & t_3\\ 0 & 0 & 0 & 1\\ \end{bmatrix} " /> 
+  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix}r_{11}&r_{12}&r_{13}&t_1\\r_{21}&r_{22}&r_{23}&t_2\\r_{31}&r_{32}&r_{33}&t_3\\0&0&0&1\\\end{bmatrix}" > 
 </div>
 
 Rotation Matrix
 
 <div align=center>
-  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix} r_{11} & r_{12} & r_{13}\\ r_{21} & r_{22} & r_{23}\\ r_{31} & r_{32} & r_{33}\\ \end{bmatrix}" /> 
+  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix}r_{11}&r_{12}&r_{13}\\r_{21}&r_{22}&r_{23}\\r_{31}&r_{32}&r_{33}\\\end{bmatrix}" > 
 </div>>
 
 Translation Vectore
 <div align=center>
-  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix} t_1\\t_2\\t_3 \end{bmatrix}" /> 
+  <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix}t_1\\t_2\\t_3\end{bmatrix}" > 
 </div>
 
 
