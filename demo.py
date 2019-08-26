@@ -295,6 +295,21 @@ def valid(datacfg, cfgfile, weightfile, outfile):
         predfile = backupdir + '/predictions_linemod_' + name +  '.mat'
         scipy.io.savemat(predfile, {'R_gts': gts_rot, 't_gts':gts_trans, 'corner_gts': gts_corners2D, 'R_prs': preds_rot, 't_prs':preds_trans, 'corner_prs': preds_corners2D})
 
+    with open('test_results', 'a') as f:
+        f.write('Results of {}\n'.format(name))
+        f.write('-----------------------------------\n')
+        f.write('  tensor to cuda : %f\n' % (t2 - t1))
+        f.write('         predict : %f\n' % (t3 - t2))
+        f.write('get_region_boxes : %f\n' % (t4 - t3))
+        f.write('            eval : %f\n' % (t5 - t4))
+        f.write('           total : %f\n' % (t5 - t1))
+        f.write('-----------------------------------\n')
+        f.write('   Acc using {} px 2D Projection = {:.2f}%\n'.format(px_threshold, acc))
+        f.write('   Acc using 10% threshold - {} vx 3D Transformation = {:.2f}%\n'.format(diam * 0.1, acc3d10))
+        f.write('   Acc using 5 cm 5 degree metric = {:.2f}%\n'.format(acc5cm5deg))
+        f.write("   Mean 2D pixel error is %f, Mean vertex error is %f, mean corner error is %f\n" % (mean_err_2d, np.mean(errs_3d), mean_corner_err_2d))
+        f.write('   Translation error: %f m, angle error: %f degree, pixel error: % f pix\n' % (testing_error_trans/nts, testing_error_angle/nts, testing_error_pixel/nts))
+
 if __name__ == '__main__':
     import sys
     if len(sys.argv) == 4:
@@ -302,7 +317,7 @@ if __name__ == '__main__':
         cfgfile = sys.argv[2]
         weightfile = sys.argv[3]
         outfile = 'comp4_det_test_'
-        makedirs('test/demo')
+        makedirs('test/{}/demo'.format(weightfile))
         valid(datacfg, cfgfile, weightfile, outfile)
     else:
         print('Usage:')
