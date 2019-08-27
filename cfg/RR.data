@@ -4,4 +4,4 @@ backup = backup/RR
 mesh = RR/RR/AD2080UL.ply
 tr_range = RR/RR/training_range.txt
 name = RR
-diam = 0.103
+diam = 0.148
