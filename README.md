@@ -51,7 +51,7 @@ If you use this code, please cite the following
   e.g.
 
   ```bash
-  python train.py cfg/RR.data cfg/yolo-pose-pre.cfg cfg/darknet19_448.conv.23 cp backup/RR/model.weights backup/RR/init.weights
+  python train_withvalidation.py cfg/RR.data cfg/yolo-pose-pre.cfg cfg/darknet19_448.conv.23 cp backup/RR/model.weights backup/RR/init.weights
   ```
 
 - Training:
