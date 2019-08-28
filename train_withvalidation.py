@@ -178,7 +178,7 @@ def test(epoch, niter, save_threshold):
             truths  = target[i].view(-1, 21)
             # Get how many objects are present in the scene
             num_gts = truths_length(truths)
-            print('no. of objects present in the scene: ', num_gts)
+            # print('no. of objects present in the scene: ', num_gts)
 
             # Iterate through each ground-truth object
             for k in range(num_gts):
@@ -334,7 +334,7 @@ def valid(epoch, niter):
             truths = target[i].view(-1, 21)
             # Get how many objects are present in the scene
             num_gts = truths_length(truths)
-            print('no. of objects present in the scene: ', num_gts)
+            # print('no. of objects present in the scene: ', num_gts)
 
             # Iterate through each ground-truth object
             for k in range(num_gts):
