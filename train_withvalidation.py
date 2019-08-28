@@ -225,9 +225,9 @@ def test(epoch, niter, save_threshold):
                 Rt_gt        = np.concatenate((R_gt, t_gt), axis=1)
                 Rt_pr        = np.concatenate((R_pr, t_pr), axis=1)
                 proj_2d_gt   = compute_projection(vertices, Rt_gt, internal_calibration)
-                print('proj_2d_gt: ', proj_2d_gt) 
+                # print('proj_2d_gt: ', proj_2d_gt)
                 proj_2d_pred = compute_projection(vertices, Rt_pr, internal_calibration)
-                print('proj_2d_pred: ', proj_2d_pred) 
+                # print('proj_2d_pred: ', proj_2d_pred)
                 norm         = np.linalg.norm(proj_2d_gt - proj_2d_pred, axis=0)
                 pixel_dist   = np.mean(norm)
                 print('pixel_dist: ', pixel_dist)
@@ -252,7 +252,7 @@ def test(epoch, niter, save_threshold):
     # Compute 2D projection, 6D pose and 5cm5degree scores
     px_threshold = save_threshold # originally 5
     acc = len(np.where(np.array(errs_2d) <= px_threshold)[0]) * 100. / (len(errs_2d)+eps)
-    print('lenth of np.where(errors_2d <= pxthres)[0]: ',len(np.where(np.array(errs_2d) <= px_threshold)[0]))
+    # print('lenth of np.where(errors_2d <= pxthres)[0]: ',len(np.where(np.array(errs_2d) <= px_threshold)[0]))
     acc3d = len(np.where(np.array(errs_3d) <= vx_threshold)[0]) * 100. / (len(errs_3d)+eps)
     acc5cm5deg = len(np.where((np.array(errs_trans) <= 0.05) & (np.array(errs_angle) <= 5))[0]) * 100. / (len(errs_trans)+eps)
     corner_acc = len(np.where(np.array(errs_corner2D) <= px_threshold)[0]) * 100. / (len(errs_corner2D)+eps)
@@ -412,7 +412,7 @@ def valid(epoch, niter):
     # Compute 2D projection, 6D pose and 5cm5degree scores
     px_threshold = 5  # originally 5
     acc = len(np.where(np.array(errs_2d) <= px_threshold)[0]) * 100. / (len(errs_2d) + eps)
-    print('lenth of np.where(errors_2d <= pxthres)[0]: ', len(np.where(np.array(errs_2d) <= px_threshold)[0]))
+    # print('lenth of np.where(errors_2d <= pxthres)[0]: ', len(np.where(np.array(errs_2d) <= px_threshold)[0]))
     acc3d = len(np.where(np.array(errs_3d) <= vx_threshold)[0]) * 100. / (len(errs_3d) + eps)
     acc5cm5deg = len(np.where((np.array(errs_trans) <= 0.05) & (np.array(errs_angle) <= 5))[0]) * 100. / (
                 len(errs_trans) + eps)
