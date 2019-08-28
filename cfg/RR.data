@@ -1,5 +1,6 @@
 train  = RR/RR/train.txt
-valid  = RR/RR/test.txt
+test  = RR/RR/test.txt
+valid = RR/RR/valid.txt
 backup = backup/RR
 mesh = RR/RR/AD2080UL.ply
 tr_range = RR/RR/training_range.txt
