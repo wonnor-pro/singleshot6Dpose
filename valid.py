@@ -162,10 +162,10 @@ def valid(datacfg, cfgfile, weightfile, outfile):
                 # Denormalize the corner predictions 
                 corners2D_gt = np.array(np.reshape(box_gt[:18], [9, 2]), dtype='float32')
                 corners2D_pr = np.array(np.reshape(box_pr[:18], [9, 2]), dtype='float32')
-                corners2D_gt[:, 0] = corners2D_gt[:, 0] * 640
-                corners2D_gt[:, 1] = corners2D_gt[:, 1] * 480               
-                corners2D_pr[:, 0] = corners2D_pr[:, 0] * 640
-                corners2D_pr[:, 1] = corners2D_pr[:, 1] * 480
+                corners2D_gt[:, 0] = corners2D_gt[:, 0] * 416
+                corners2D_gt[:, 1] = corners2D_gt[:, 1] * 416
+                corners2D_pr[:, 0] = corners2D_pr[:, 0] * 416
+                corners2D_pr[:, 1] = corners2D_pr[:, 1] * 416
                 preds_corners2D.append(corners2D_pr)
                 gts_corners2D.append(corners2D_gt)
 

@@ -17,7 +17,7 @@ def makedirs(path):
     if not os.path.exists( path ):
         os.makedirs( path )
 
-def valid_compare(datacfg, cfgfile, weightfile, outfile):
+def valid(datacfg, cfgfile, weightfile, outfile):
     def truths_length(truths):
         for i in range(50):
             if truths[i][1] == 0:
@@ -162,10 +162,10 @@ def valid_compare(datacfg, cfgfile, weightfile, outfile):
                 # Denormalize the corner predictions 
                 corners2D_gt = np.array(np.reshape(box_gt[:18], [9, 2]), dtype='float32')
                 corners2D_pr = np.array(np.reshape(box_pr[:18], [9, 2]), dtype='float32')
-                corners2D_gt[:, 0] = corners2D_gt[:, 0] * 640
-                corners2D_gt[:, 1] = corners2D_gt[:, 1] * 480               
-                corners2D_pr[:, 0] = corners2D_pr[:, 0] * 640
-                corners2D_pr[:, 1] = corners2D_pr[:, 1] * 480
+                corners2D_gt[:, 0] = corners2D_gt[:, 0] * 416
+                corners2D_gt[:, 1] = corners2D_gt[:, 1] * 416
+                corners2D_pr[:, 0] = corners2D_pr[:, 0] * 416
+                corners2D_pr[:, 1] = corners2D_pr[:, 1] * 416
                 preds_corners2D.append(corners2D_pr)
                 gts_corners2D.append(corners2D_gt)
 
@@ -265,11 +265,11 @@ if __name__ == '__main__':
         weightfile2 = sys.argv[4]
         outfile1 = 'comp4_det_test_1'
         outfile2 = 'comp4_det_test_2'
-        print('-----------------results for testing weightfile1-----------------')
-        valid(datacfg, cfgfile, weightfile1, outfile)
+        print('-----------------results for testing {}-----------------'.format(weightfile1))
+        valid(datacfg, cfgfile, weightfile1, outfile1)
         print('-----------------------------------------------------------------\n')
-        print('-----------------results for testing weightfile2-----------------')
-        valid(datacfg, cfgfile, weightfile2, outfile)
+        print('-----------------results for testing {}-----------------'.format(weightfile1))
+        valid(datacfg, cfgfile, weightfile2, outfile2)
         print('-----------------------------------------------------------------\n')
     else:
         print('Usage:')
