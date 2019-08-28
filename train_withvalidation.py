@@ -127,7 +127,7 @@ def train(epoch):
     t1 = time.time()
     return epoch * math.ceil(len(train_loader.dataset) / float(batch_size) ) + niter - 1 
 
-def test(epoch, niter):
+def test(epoch, niter, save_threshold):
     def truths_length(truths):
         for i in range(50):
             if truths[i][1] == 0:
@@ -250,7 +250,7 @@ def test(epoch, niter):
         t5 = time.time()
 
     # Compute 2D projection, 6D pose and 5cm5degree scores
-    px_threshold = 5 # originally 5
+    px_threshold = save_threshold # originally 5
     acc = len(np.where(np.array(errs_2d) <= px_threshold)[0]) * 100. / (len(errs_2d)+eps)
     print('lenth of np.where(errors_2d <= pxthres)[0]: ',len(np.where(np.array(errs_2d) <= px_threshold)[0]))
     acc3d = len(np.where(np.array(errs_3d) <= vx_threshold)[0]) * 100. / (len(errs_3d)+eps)
@@ -576,7 +576,7 @@ if __name__ == "__main__":
             niter = train(epoch)
             # TEST and SAVE
             if (epoch % 10 == 0) and (epoch is not 0): 
-                test(epoch, niter)
+                test(epoch, niter, save_threshold=100)
                 logging('save training stats to %s/costs.npz' % (backupdir))
                 np.savez(os.path.join(backupdir, "costs.npz"),
                     training_iters=training_iters,
