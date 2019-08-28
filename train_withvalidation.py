@@ -576,7 +576,7 @@ if __name__ == "__main__":
             niter = train(epoch)
             # TEST and SAVE
             if (epoch % 10 == 0) and (epoch is not 0): 
-                test(epoch, niter, save_threshold=10)
+                test(epoch, niter, save_threshold=5)
                 logging('save training stats to %s/costs.npz' % (backupdir))
                 np.savez(os.path.join(backupdir, "costs.npz"),
                     training_iters=training_iters,
