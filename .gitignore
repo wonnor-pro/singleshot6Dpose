@@ -339,3 +339,6 @@ cfg/darknet19_448.conv.23
 # backup
 backup/
 backup1.tar
+
+# mac
+*.DS_Store
