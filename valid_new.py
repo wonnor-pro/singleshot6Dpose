@@ -109,8 +109,11 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
     # Specify the number of workers for multiple processing, get the dataloader for the test dataset
     kwargs = {'num_workers': 4, 'pin_memory': True}
     test_loader = torch.utils.data.DataLoader(
-        valid_dataset, batch_size=valid_batchsize, shuffle=False, **kwargs) 
-
+        valid_dataset, batch_size=valid_batchsize, shuffle=False, **kwargs)
+    if test:
+        logging("--------------test file--------------")
+    else:
+        logging("--------------validate file--------------")
     logging("   Testing {}...".format(name))
     logging("   Number of test samples: %d" % len(test_loader.dataset))
     # Iterate through test batches (Batch size for test data is 1)
@@ -266,9 +269,7 @@ if __name__ == '__main__':
         cfgfile = sys.argv[2]
         weightfile = sys.argv[3]
         outfile = 'comp4_det_test_'
-        print("--------------test file--------------")
         valid(datacfg, cfgfile, weightfile, outfile, True)
-        print("--------------validate file--------------")
         valid(datacfg, cfgfile, weightfile, outfile, False)
     else:
         print('Usage:')

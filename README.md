@@ -63,7 +63,7 @@ If you use this code, please cite the following
   e.g.
 
   ```bash
-  python train.py cfg/RR.data cfg/yolo-pose.cfg backup/RR/model.weights
+  python train_withvalidation.py cfg/RR.data cfg/yolo-pose.cfg backup/RR/model.weights
   ```
 
 - Testing:
@@ -75,7 +75,7 @@ If you use this code, please cite the following
   e.g.
 
   ```bash
-  python valid.py cfg/RR.data cfg/yolo-pose.cfg backup/RR/model.weights
+  python valid_n.py cfg/RR.data cfg/yolo-pose.cfg backup/RR/model.weights
   ```
 
 **Training Stage**
