@@ -332,6 +332,8 @@ ASALocalRun/
 # Dataset
 VOCdevkit/
 LINEMOD/
+
+# RR dataset
 RR/RR/DemoImages_Left
 RR/RR/DemoImages_Right
 RR/RR/JPEGImages
