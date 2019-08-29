@@ -104,7 +104,7 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
                        shuffle=False,
                        transform=transforms.Compose([
                            transforms.ToTensor(),]))
-    valid_batchsize = 1
+    valid_batchsize = 2
 
     # Specify the number of workers for multiple processing, get the dataloader for the test dataset
     kwargs = {'num_workers': 4, 'pin_memory': True}
@@ -128,61 +128,102 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
             target = target.cuda()
         
         # Wrap tensors in Variable class, set volatile=True for inference mode and to use minimal memory during inference
-        data = Variable(data, volatile=True)
+        data1 = Variable(data[0], volatile=True)
+        data2 = Variable(data[1], volatile=True)
         t2 = time.time()
         
         # Forward pass
-        output = model(data).data  
+        output1 = model(data1).data  
+        output2 = model(data2).data
         t3 = time.time()
         
         # Using confidence threshold, eliminate low-confidence predictions
-        all_boxes = get_region_boxes(output, conf_thresh, num_classes)        
+        all_boxes1 = get_region_boxes(output1, conf_thresh, num_classes)
+        all_boxes2 = get_region_boxes(output2, conf_thresh, num_classes)
         t4 = time.time()
 
         # Iterate through all images in the batch
         for i in range(output.size(0)):
         
             # For each image, get all the predictions
-            boxes   = all_boxes[i]
+            boxes1   = all_boxes1[i]
+            boxes2   = all_boxes2[i]
         
             # For each image, get all the targets (for multiple object pose estimation, there might be more than 1 target per image)
-            truths  = target[i].view(-1, 21)
+            truths1  = target[0][i].view(-1, 21)
+            truths2  = target[1][i].view(-1, 21)
         
             # Get how many object are present in the scene
-            num_gts = truths_length(truths)
+            num_gts1 = truths_length(truths1)
+            num_gts2  = truths_length(truths2)
 
              # Iterate through each ground-truth object
-            for k in range(num_gts):
-                box_gt        = [truths[k][1], truths[k][2], truths[k][3], truths[k][4], truths[k][5], truths[k][6], 
-                                truths[k][7], truths[k][8], truths[k][9], truths[k][10], truths[k][11], truths[k][12], 
-                                truths[k][13], truths[k][14], truths[k][15], truths[k][16], truths[k][17], truths[k][18], 1.0, 1.0, truths[k][0]]
-                best_conf_est = -1
+            for k in range(num_gts1):
+                box_gt1        = [truths1[k][1], truths1[k][2], truths1[k][3], truths1[k][4], truths1[k][5], truths1[k][6], 
+                                truths1[k][7], truths1[k][8], truths1[k][9], truths1[k][10], truths1[k][11], truths1[k][12], 
+                                truths1[k][13], truths1[k][14], truths1[k][15], truths1[k][16], truths1[k][17], truths1[k][18], 1.0, 1.0, truths1[k][0]]
+                best_conf_est1 = -1
+
+                box_gt2        = [truths2[k][1], truths2[k][2], truths2[k][3], truths2[k][4], truths2[k][5], truths2[k][6], 
+                                truths2[k][7], truths2[k][8], truths2[k][9], truths2[k][10], truths2[k][11], truths2[k][12], 
+                                truths2[k][13], truths2[k][14], truths2[k][15], truths2[k][16], truths2[k][17], truths2[k][18], 1.0, 1.0, truths2[k][0]]
+                best_conf_est2 = -1
 
                 # If the prediction has the highest confidence, choose it as our prediction for single object pose estimation
-                for j in range(len(boxes)):
-                    if (boxes[j][18] > best_conf_est):
-                        match         = corner_confidence9(box_gt[:18], torch.FloatTensor(boxes[j][:18]))
-                        box_pr        = boxes[j]
-                        best_conf_est = boxes[j][18]
+                for j in range(len(boxes1)):
+                    if (boxes1[j][18] > best_conf_est1):
+                        match1         = corner_confidence9(box_gt1[:18], torch.FloatTensor(boxes1[j][:18]))
+                        box_pr1        = boxes1[j]
+                        best_conf_est1 = boxes1[j][18]
+                
+                for j in range(len(boxes2)):
+                    if (boxes2[j][18] > best_conf_est2):
+                        match2         = corner_confidence9(box_gt2[:18], torch.FloatTensor(boxes2[j][:18]))
+                        box_pr2        = boxes2[j]
+                        best_conf_est2 = boxes2[j][18]
 
                 # Denormalize the corner predictions 
-                corners2D_gt = np.array(np.reshape(box_gt[:18], [9, 2]), dtype='float32')
-                corners2D_pr = np.array(np.reshape(box_pr[:18], [9, 2]), dtype='float32')
-                corners2D_gt[:, 0] = corners2D_gt[:, 0] * 416
-                corners2D_gt[:, 1] = corners2D_gt[:, 1] * 416
-                corners2D_pr[:, 0] = corners2D_pr[:, 0] * 416
-                corners2D_pr[:, 1] = corners2D_pr[:, 1] * 416
+                corners2D_gt1 = np.array(np.reshape(box_gt1[:18], [9, 2]), dtype='float32')
+                corners2D_gt2 = np.array(np.reshape(box_gt2[:18], [9, 2]), dtype='float32')
+                corners2D_pr1 = np.array(np.reshape(box_pr1[:18], [9, 2]), dtype='float32')
+                corners2D_pr2 = np.array(np.reshape(box_pr2[:18], [9, 2]), dtype='float32')
+                corners2D_gt1[:, 0] = corners2D_gt1[:, 0] * 416
+                corners2D_gt1[:, 1] = corners2D_gt1[:, 1] * 416
+                corners2D_gt2[:, 0] = corners2D_gt2[:, 0] * 416
+                corners2D_gt2[:, 1] = corners2D_gt2[:, 1] * 416
+                corners2D_pr1[:, 0] = corners2D_pr1[:, 0] * 416
+                corners2D_pr1[:, 1] = corners2D_pr1[:, 1] * 416
+                corners2D_pr2[:, 0] = corners2D_pr2[:, 0] * 416
+                corners2D_pr2[:, 1] = corners2D_pr2[:, 1] * 416
                 preds_corners2D.append(corners2D_pr)
                 gts_corners2D.append(corners2D_gt)
 
                 # Compute corner prediction error
-                corner_norm = np.linalg.norm(corners2D_gt - corners2D_pr, axis=1)
-                corner_dist = np.mean(corner_norm)
-                errs_corner2D.append(corner_dist)
+                corner_norm1 = np.linalg.norm(corners2D_gt1 - corners2D_pr1, axis=1)
+                corner_norm2 = np.linalg.norm(corners2D_gt2 - corners2D_pr2, axis=1)
+                corner_dist1 = np.mean(corner_norm1)
+                corner_dist2 = np.mean(corner_norm2)
+                errs_corner2D.append(corner_dist1)
+                errs_corner2D.append(corner_dist2)
+
+
                 
+                # chagne the dimension of the gts from (9,2) to (1,9,2)
+                
+                corners2D_gt11 = np.array([corners2D_gt1])
+                corners2D_gt22 = np.array([corners2D_gt2])
+                corners2D_pr11 = np.array([corners2D_pr1])
+                corners2D_pr22 = np.array([corners2D_pr2])
+
+                # correct the pts and use right ones as standard
+                corners2D_gt = correct(corners2D_gt11, corners2D_gt22)
+                corners2D_pr = correct(corners2D_pr11, corners2D_pr22)
+
                 # Compute [R|t] by pnp
                 R_gt, t_gt = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_gt, np.array(internal_calibration, dtype='float32'))
                 R_pr, t_pr = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_pr, np.array(internal_calibration, dtype='float32'))
+
+
 
                 if save:
                     preds_trans.append(t_pr)

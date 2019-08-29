@@ -241,13 +241,13 @@ def test(epoch, niter):
                 corners2D_pr11 = np.array([corners2D_pr1])
                 corners2D_pr22 = np.array([corners2D_pr2])
 
-                # Compute [R|t] by pnp
-                # R_gt, t_gt = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_gt, np.array(internal_calibration, dtype='float32'))
-                # R_pr, t_pr = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_pr, np.array(internal_calibration, dtype='float32'))
+                corners2D_gt = correct(corners2D_gt11, corners2D_gt22)
+                corners2D_pr = correct(corners2D_pr11, corners2D_pr22)
 
-                # Comput [R|t] by multi-pnp
-                R_gt, t_gt = multi_pnp(corners2D_gt11, corners2D_gt22)
-                R_pr, t_pr = multi_pnp(corners2D_pr11, corners2D_pr22)
+                # Compute [R|t] by pnp
+                R_gt, t_gt = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_gt, np.array(internal_calibration, dtype='float32'))
+                R_pr, t_pr = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_pr, np.array(internal_calibration, dtype='float32'))
+
                 # Compute errors
 
                 # Compute translation error
