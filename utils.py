@@ -1063,3 +1063,31 @@ def read_pose(lab_path):
         return truths
     else:
         return np.array([])
+
+def get_fundamental_Matrix():
+    F = np.zeros((3, 3), dtype='float64')
+    F[0, 0], F[0, 1], F[0, 2] = -1.037161536570163004e-09,  -4.470992688241708579e-07,  7.736382196580566585e-05
+    F[1, 0], F[1, 1], F[1, 2] = 3.339645039948296452e-07,   1.254647904590314481e-08,   4.970193841300335480e-02
+    F[2, 0], F[2, 1], F[2, 2] = -1.664019708108154395e-04,  -4.971458627155430493e-02,  1.000000000000000000e+00
+    return F
+
+def get_essential_Matrix():
+    E = np.zeros((3, 3), dtype='float64')
+    E[0, 0], E[0, 1], E[0, 2] = 2.432205068784403738e-03,   1.048425826211039746e+00,   1.599026460410352957e-01, 1
+    E[1, 0], E[1, 1], E[1, 2] = -7.835090767381358567e-01,  -2.943374698018854860e-02,  -4.970065377574755416e+01, 2
+    E[2, 0], E[2, 1], E[2, 2] = -4.715802711889371945e-03,  4.969603045547423648e+01,   -3.274369665914990402e-02, 3
+    return E
+
+def correct(pts1, pts2):
+    '''
+    :param pts1: shape: 1xNx2
+    :param pts2: shape: 1xNx2
+    :return: pts1_new: shape Nx2
+    '''
+    F = get_fundamental_Matrix()
+    pts1_new, pts2_new = cv2.correctMatches(F, pts1, pts2)
+
+    pts1_new = pts1_new[0] # Nx2
+
+    # take the right camera pts prediction
+    return pts1_new
