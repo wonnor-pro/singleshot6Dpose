@@ -131,7 +131,7 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
         data1 = Variable(data[0], volatile=True)
         data2 = Variable(data[1], volatile=True)
         t2 = time.time()
-        print(data1.shape())
+        print(data1.shape)
         
         # Forward pass
         output1 = model(data1).data  
