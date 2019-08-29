@@ -75,7 +75,7 @@ If you use this code, please cite the following
   e.g.
 
   ```bash
-  python valid_n.py cfg/RR.data cfg/yolo-pose.cfg backup/RR/model.weights
+  python valid_new.py cfg/RR.data cfg/yolo-pose.cfg backup/RR/model.weights
   ```
 
 **Training Stage**
@@ -568,7 +568,6 @@ The coordinates are normalized by the image width and height: x / image_width an
    2019-08-25 04:37:02 save weights to backup/RR/model.weights
    2019-08-25 04:37:02 epoch 111, processed 62160 samples, lr 0.000010
    ```
-
 
 ---
 
