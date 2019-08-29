@@ -18,6 +18,8 @@ def makedirs(path):
         os.makedirs( path )
 
 def valid(datacfg, cfgfile, weightfile, outfile, test=True):
+    # If test == True, then do test, else do validation.
+
     def truths_length(truths):
         for i in range(50):
             if truths[i][1] == 0:

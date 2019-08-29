@@ -25,7 +25,7 @@ def valid(datacfg, cfgfile, weightfile, outfile):
 
     # Parse configuration files
     options      = read_data_cfg(datacfg)
-    valid_images = options['valid']
+    valid_images = options['test']
     meshname     = options['mesh']
     backupdir    = options['backup']
     name         = options['name']
