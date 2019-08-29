@@ -203,8 +203,10 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
                 corners2D_pr1[:, 1] = corners2D_pr1[:, 1] * 416
                 corners2D_pr2[:, 0] = corners2D_pr2[:, 0] * 416
                 corners2D_pr2[:, 1] = corners2D_pr2[:, 1] * 416
-                preds_corners2D.append(corners2D_pr)
-                gts_corners2D.append(corners2D_gt)
+                preds_corners2D.append(corners2D_pr1)
+                preds_corners2D.append(corners2D_pr2)
+                gts_corners2D.append(corners2D_gt1)
+                gts_corners2D.append(corners2D_gt2)
 
                 # Compute corner prediction error
                 corner_norm1 = np.linalg.norm(corners2D_gt1 - corners2D_pr1, axis=1)
