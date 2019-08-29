@@ -156,8 +156,10 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
             boxes2   = all_boxes2[i]
         
             # For each image, get all the targets (for multiple object pose estimation, there might be more than 1 target per image)
-            truths1  = target[0, i].view(-1, 21)
-            truths2  = target[1, i].view(-1, 21)
+            target1 = torch.unsqueeze(target[0], 0)
+            target2 = torch.unsqueeze(target[1], 0)
+            truths1  = target1[i].view(-1, 21)
+            truths2  = target2[i].view(-1, 21)
         
             # Get how many object are present in the scene
             num_gts1 = truths_length(truths1)
