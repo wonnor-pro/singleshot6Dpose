@@ -236,13 +236,16 @@ def test(epoch, niter):
 
                 # chagne the dimension of the gts from (9,2) to (1,9,2)
                 
-                corners2D_gt11 = np.array([corners2D_gt1])
-                corners2D_gt22 = np.array([corners2D_gt2])
+                # corners2D_gt11 = np.array([corners2D_gt1])
+                # corners2D_gt22 = np.array([corners2D_gt2])
                 corners2D_pr11 = np.array([corners2D_pr1])
                 corners2D_pr22 = np.array([corners2D_pr2])
 
-                corners2D_gt = correct(corners2D_gt11, corners2D_gt22)
+                corners2D_gt = corners2D_gt1
                 corners2D_pr = correct(corners2D_pr11, corners2D_pr22)
+
+                print("priginal:\n", corners2D_pr1)
+                print("corrected:\n", corners2D_pr)
 
                 # Compute [R|t] by pnp
                 R_gt, t_gt = pnp(np.array(np.transpose(np.concatenate((np.zeros((3, 1)), corners3D[:3, :]), axis=1)), dtype='float32'),  corners2D_gt, np.array(internal_calibration, dtype='float32'))
