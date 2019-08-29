@@ -128,9 +128,11 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
             target = target.cuda()
         
         # Wrap tensors in Variable class, set volatile=True for inference mode and to use minimal memory during inference
-        data1 = Variable(data[0], volatile=True)
-        data2 = Variable(data[1], volatile=True)
+        data1 = Variable([data[0]], volatile=True)
+        data2 = Variable([data[1]], volatile=True)
         t2 = time.time()
+        print(data.shape)
+        print(data1.shape)
         
         # Forward pass
         output1 = model(data1).data  
@@ -143,7 +145,7 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
         t4 = time.time()
 
         # Iterate through all images in the batch
-        for i in range(output.size(0)):
+        for i in range(output1.size(0)):
         
             # For each image, get all the predictions
             boxes1   = all_boxes1[i]
