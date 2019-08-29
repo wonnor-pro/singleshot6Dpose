@@ -209,11 +209,11 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
                 gts_corners2D.append(corners2D_gt2)
 
                 # Compute corner prediction error
-                #corner_norm1 = np.linalg.norm(corners2D_gt1 - corners2D_pr1, axis=1)
+                corner_norm1 = np.linalg.norm(corners2D_gt1 - corners2D_pr1, axis=1)
                 corner_norm2 = np.linalg.norm(corners2D_gt2 - corners2D_pr2, axis=1)
-                #corner_dist1 = np.mean(corner_norm1)
+                corner_dist1 = np.mean(corner_norm1)
                 corner_dist2 = np.mean(corner_norm2)
-                #errs_corner2D.append(corner_dist1)
+                errs_corner2D.append(corner_dist1)
                 errs_corner2D.append(corner_dist2)
 
 
@@ -229,9 +229,9 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
                 corners2D_gt = correct(corners2D_gt11, corners2D_gt22)
                 corners2D_pr = correct(corners2D_pr11, corners2D_pr22)
 
-                corner_norm1 = np.linalg.norm(corners2D_gt - corners2D_pr, axis=1)
-                corner_dist1 = np.mean(corner_norm1)
-                errs_corner2D.append(corner_dist1)
+                # corner_norm1 = np.linalg.norm(corners2D_gt - corners2D_pr, axis=1)
+                # corner_dist1 = np.mean(corner_norm1)
+                # errs_corner2D.append(corner_dist1)
 
 
                 # Compute [R|t] by pnp
