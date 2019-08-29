@@ -143,7 +143,7 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
         t4 = time.time()
 
         # Iterate through all images in the batch
-        for i in range(output.size(0)):
+        for i in range(output1.size(0)):
         
             # For each image, get all the predictions
             boxes1   = all_boxes1[i]
