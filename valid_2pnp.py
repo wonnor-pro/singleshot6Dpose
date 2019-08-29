@@ -128,7 +128,7 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
             target = target.cuda()
         
         # Wrap tensors in Variable class, set volatile=True for inference mode and to use minimal memory during inference
-        data1 = torch.tensor([data[0]])
+        data1 = torch.unsqueeze(data[0])
         print(data1.shape)
         data1 = Variable(data[0], volatile=True)
         data2 = Variable(data[1], volatile=True)
