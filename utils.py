@@ -43,7 +43,6 @@ def get_camera_intrinsic():
     # K[2, 2] = 1.
     # return K
 
-
 def compute_projection(points_3D, transformation, internal_calibration):
     projections_2d = np.zeros((2, points_3D.shape[1]), dtype='float32')
     camera_projection = (internal_calibration.dot(transformation)).dot(points_3D)
