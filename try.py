@@ -79,6 +79,7 @@ class listDataset(Dataset):
         assert index <= len(self), 'index range error'
 
         # Get the image path
+        print(self.lines[index])
         imgpath = self.lines[index].rstrip()
 
         # Decide which size you are going to resize the image depending on the iteration
@@ -176,6 +177,7 @@ def main():
         print('data: ', data)
         print('target: ', target)
         print('-------------------------------')
+        i += 1
 
 if __name__ == "__main__":
     main()
