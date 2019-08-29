@@ -334,11 +334,7 @@ VOCdevkit/
 LINEMOD/
 
 # RR dataset
-RR/RR/DemoImages_Left
-RR/RR/DemoImages_Right
-RR/RR/JPEGImages
-RR/RR/JPEGImages_Left
-RR/RR/JPEGImages_Right
+RR/
 
 # Networksetting
 cfg/darknet19_448.conv.23
