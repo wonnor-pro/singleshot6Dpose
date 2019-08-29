@@ -22,7 +22,8 @@ import random
 import math
 import shutil
 from torchvision import datasets, transforms
-from torch.autograd import Variable # Useful info about autograd: http://pytorch.org/docs/master/notes/autograd.html
+from torch.autograd import Variable 
+# Useful info about autograd: http://pytorch.org/docs/master/notes/autograd.html
 
 from dataset import listDataset
 from utils import *    
