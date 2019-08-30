@@ -460,7 +460,7 @@ if __name__ == "__main__":
     validatelist  = data_options['valid']
     nsamples      = file_lines(trainlist)
     gpus          = data_options['gpus']  # e.g. 0,1,2,3
-    gpus 		  = '0'
+    gpus 		  = '1'
     meshname      = data_options['mesh']
     num_workers   = int(data_options['num_workers'])
     backupdir     = data_options['backup']
