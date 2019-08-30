@@ -1085,9 +1085,9 @@ def correct(pts1, pts2):
     :return: pts1_new: shape Nx2
     '''
     F = get_fundamental_Matrix()
-    pts1_new, pts2_new = cv2.correctMatches(F, pts1, pts2)
+    pts2_new, pts1_new = cv2.correctMatches(F, pts2, pts1)
 
-    pts1_new = pts1_new[0] # Nx2
+    pts2_new = pts2_new[0] # Nx2
 
     # take the right camera pts prediction
-    return pts1_new
+    return pts2_new
