@@ -334,7 +334,6 @@ VOCdevkit/
 LINEMOD/
 
 # RR dataset
-RR/
 
 # Networksetting
 cfg/darknet19_448.conv.23
