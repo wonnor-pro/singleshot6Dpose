@@ -228,7 +228,7 @@ def valid(datacfg, cfgfile, weightfile, outfile, test=True):
                 corners2D_gt = corners2D_gt1
                 corners2D_pr = correct(corners2D_pr11, corners2D_pr22)
 
-                print("priginal:\n", corners2D_pr1)
+                print("original:\n", corners2D_pr1)
                 print("corrected:\n", corners2D_pr)
 
                 # Compute [R|t] by pnp
