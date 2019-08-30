@@ -1,4 +1,5 @@
 train  = RR/RR/train.txt
+pre  = RR/RR/pre.txt
 test  = RR/RR/test.txt
 valid = RR/RR/valid.txt
 backup = backup/RR
