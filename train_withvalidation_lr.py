@@ -103,7 +103,7 @@ def train(epoch):
                                                 batch_size=batch_size, shuffle=False, **kwargs)
 
     # TRAINING
-    lr = adjust_learning_rate_e(optimizer, processed_batches)
+    lr = adjust_learning_rate(optimizer, processed_batches)
     logging('epoch %d, processed %d samples, lr %f' % (epoch, epoch * len(train_loader.dataset), lr))
     # Start training
     model.train()
@@ -114,7 +114,7 @@ def train(epoch):
     for batch_idx, (data, target) in enumerate(train_loader):
         t2 = time.time()
         # adjust learning rate
-        # adjust_learning_rate(optimizer, processed_batches)
+        adjust_learning_rate(optimizer, processed_batches)
         processed_batches = processed_batches + 1
         # Pass the data to GPU
         if use_cuda:
