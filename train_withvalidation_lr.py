@@ -37,7 +37,7 @@ def interrupted(signum, frame):
     raise InputTimeoutError
 
 # Adjust learning rate during training, learning schedule can be changed in network config file
-def adjust_learning_rate(optimizer, batch):
+def adjust_learning_rate_e(optimizer, batch):
     lr = learning_rate
     for i in range(len(steps)):
         scale = scales[i] if i < len(scales) else 1
@@ -68,6 +68,19 @@ def adjust_learning_rate(optimizer, batch):
     print('===========================================')
     return lr
 
+def adjust_learning_rate(optimizer, batch):
+    lr = learning_rate
+    for i in range(len(steps)):
+        scale = scales[i] if i < len(scales) else 1
+        if batch >= steps[i]:
+            lr = lr * scale
+            if batch == steps[i]:
+                break
+        else:
+            break
+    for param_group in optimizer.param_groups:
+        param_group['lr'] = lr/batch_size
+    return lr
 def train(epoch):
 
     global processed_batches
@@ -86,7 +99,7 @@ def train(epoch):
                                                 batch_size=batch_size, shuffle=False, **kwargs)
 
     # TRAINING
-    lr = adjust_learning_rate(optimizer, processed_batches)
+    lr = adjust_learning_rate_e(optimizer, processed_batches)
     logging('epoch %d, processed %d samples, lr %f' % (epoch, epoch * len(train_loader.dataset), lr))
     # Start training
     model.train()
