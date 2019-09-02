@@ -111,7 +111,7 @@ def train(epoch):
     for batch_idx, (data, target) in enumerate(train_loader):
         t2 = time.time()
         # adjust learning rate
-        adjust_learning_rate(optimizer, processed_batches)
+        # adjust_learning_rate(optimizer, processed_batches)
         processed_batches = processed_batches + 1
         # Pass the data to GPU
         if use_cuda:
