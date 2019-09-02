@@ -53,7 +53,7 @@ def adjust_learning_rate_e(optimizer, batch):
     print('suggested lr: {}'.format(lr))
     print('-------------------------------------------')
     signal.signal(signal.SIGALRM, interrupted)
-    signal.alarm(5)
+    signal.alarm(0)
     try:
         lr_i = input('Setting lr to new value: e-')
         if lr_i != '':
@@ -135,6 +135,7 @@ def train(epoch):
         loss = region_loss(output, target)
         training_iters.append(epoch * math.ceil(len(train_loader.dataset) / float(batch_size) ) + niter)
         training_losses.append(convert2cpu(loss.data))
+        training_rate.append(lr)
         niter += 1
         t7 = time.time()
         # Backprop: compute gradient of the loss with respect to model parameters
@@ -561,6 +562,7 @@ if __name__ == "__main__":
     # Variable to save
     training_iters          = []
     training_losses         = []
+    training_rate           = []
     testing_iters           = []
     testing_losses          = []
     testing_errors_trans    = []
@@ -622,10 +624,11 @@ if __name__ == "__main__":
                 np.savez(os.path.join(backupdir, "costs.npz"),
                     training_iters=training_iters,
                     training_losses=training_losses,
+                    training_rate=training_rate,
                     testing_iters=testing_iters,
                     testing_accuracies=testing_accuracies,
                     testing_errors_pixel=testing_errors_pixel,
-                    testing_errors_angle=testing_errors_angle) 
+                    testing_errors_angle=testing_errors_angle)
                 if (testing_accuracies[-1] > best_acc ):
                     best_acc = testing_accuracies[-1]
                     logging('best model so far!')
