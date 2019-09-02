@@ -23,15 +23,22 @@ from MeshPly import MeshPly
 
 import warnings
 warnings.filterwarnings("ignore")
+import signal
 
 # Create new directory
 def makedirs(path):
     if not os.path.exists( path ):
         os.makedirs( path )
 
+class InputTimeoutError(Exception):
+    pass
+
+def interrupted(signum, frame):
+    raise InputTimeoutError
+
 # Adjust learning rate during training, learning schedule can be changed in network config file
 def adjust_learning_rate(optimizer, batch):
-    lr = 0.00001
+    lr = learning_rate
     for i in range(len(steps)):
         scale = scales[i] if i < len(scales) else 1
         if batch >= steps[i]:
@@ -42,6 +49,18 @@ def adjust_learning_rate(optimizer, batch):
             break
     for param_group in optimizer.param_groups:
         param_group['lr'] = lr/batch_size
+    print('===========================================')
+    print('suggested lr: {}'.format(lr))
+    print('-------------------------------------------')
+    signal.signal(signal.SIGALRM, interrupted)
+    signal.alarm(3)
+    try:
+        lr = input('Setting lr to new value:')
+    except InputTimeoutError:
+        print('\ntimeout')
+    signal.alarm(0)
+    print('lr is set to {}'.format(lr))
+    print('===========================================')
     return lr
 
 def train(epoch):
