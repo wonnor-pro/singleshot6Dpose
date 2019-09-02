@@ -55,9 +55,10 @@ def adjust_learning_rate_e(optimizer, batch):
     signal.signal(signal.SIGALRM, interrupted)
     signal.alarm(5)
     try:
-        lr_i = input('Setting lr to new value:')
-        lr_i = float(lr_i)
-        if lr_i == 0.1 or lr_i == 0.01 or lr_i == 0.001 or lr_i == 0.0001 or lr_i == 0.00001 or lr_i == 0.000001 or lr_i == 0.0000001 or lr_i == 0.00000001:
+        lr_i = input('Setting lr to new value: e-')
+        lr_i = int(lr_i)
+        if lr_i > 0 and lr_i < 8:
+            lr_i = 10 ** (-lr_i)
             lr = lr_i
         else:
             print('invalid input.')
