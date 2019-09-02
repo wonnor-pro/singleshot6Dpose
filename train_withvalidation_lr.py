@@ -628,7 +628,8 @@ if __name__ == "__main__":
                     testing_iters=testing_iters,
                     testing_accuracies=testing_accuracies,
                     testing_errors_pixel=testing_errors_pixel,
-                    testing_errors_angle=testing_errors_angle)
+                    testing_errors_angle=testing_errors_angle,
+                    testing_errors_trans=testing_errors_trans)
                 if (testing_accuracies[-1] > best_acc ):
                     best_acc = testing_accuracies[-1]
                     logging('best model so far!')
