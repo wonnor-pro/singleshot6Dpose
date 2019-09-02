@@ -55,7 +55,12 @@ def adjust_learning_rate(optimizer, batch):
     signal.signal(signal.SIGALRM, interrupted)
     signal.alarm(3)
     try:
-        lr = input('Setting lr to new value:')
+        lr_i = input('Setting lr to new value:')
+        lr_i = float(lr_i)
+        if lr_i == 0.1 or lr_i == 0.01 or lr_i == 0.001 or lr_i == 0.0001 or lr_i == 0.00001 or lr_i == 0.000001 or lr_i == 0.0000001 or lr_i == 0.00000001:
+            lr = input('Setting lr to new value:')
+        else
+            print('invalid input.')
     except InputTimeoutError:
         print('\ntimeout')
     signal.alarm(0)
