@@ -481,11 +481,11 @@ def valid(epoch, niter):
     testing_error_trans / (nts + eps), testing_error_angle / (nts + eps)))
 
     # Register losses and errors for saving later on
-    testing_iters.append(niter)
-    testing_errors_trans.append(testing_error_trans / (nts + eps))
-    testing_errors_angle.append(testing_error_angle / (nts + eps))
-    testing_errors_pixel.append(testing_error_pixel / (nts + eps))
-    testing_accuracies.append(acc)
+    valid_iters.append(niter)
+    valid_errors_trans.append(testing_error_trans / (nts + eps))
+    valid_errors_angle.append(testing_error_angle / (nts + eps))
+    valid_errors_pixel.append(testing_error_pixel / (nts + eps))
+    valid_accuracies.append(acc)
 
 if __name__ == "__main__":
 
@@ -570,6 +570,13 @@ if __name__ == "__main__":
     testing_errors_pixel    = []
     testing_accuracies      = []
 
+    valid_iters = []
+    valid_losses = []
+    valid_errors_trans = []
+    valid_errors_angle = []
+    valid_errors_pixel = []
+    valid_accuracies = []
+
     # Get the intrinsic camera matrix, mesh, vertices and corners of the model
     mesh                 = MeshPly(meshname)
     vertices             = np.c_[np.array(mesh.vertices), np.ones((len(mesh.vertices), 1))].transpose()
@@ -629,7 +636,13 @@ if __name__ == "__main__":
                     testing_accuracies=testing_accuracies,
                     testing_errors_pixel=testing_errors_pixel,
                     testing_errors_angle=testing_errors_angle,
-                    testing_errors_trans=testing_errors_trans)
+                    testing_errors_trans=testing_errors_trans,
+                    valid_iters=valid_iters,
+                    valid_losses=valid_losses,
+                    valid_errors_trans=valid_errors_trans,
+                    valid_errors_angle=valid_errors_angle,
+                    valid_errors_pixel=valid_errors_pixel,
+                    valid_accuracies=valid_accuracies)
                 if (testing_accuracies[-1] > best_acc ):
                     best_acc = testing_accuracies[-1]
                     logging('best model so far!')
