@@ -119,8 +119,8 @@ class listDataset(Dataset):
                 else:
                     print(path + ' already exist')
                     return False
-            mkdir('debug/2')
-            imgpath = 'debug/2/{}.png'.format(time.time())
+            mkdir('debug/3')
+            imgpath = 'debug/3/{}.png'.format(time.time())
             img.save(imgpath)
             print("{} saved!".format(imgpath))
 
