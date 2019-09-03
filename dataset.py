@@ -96,7 +96,7 @@ class listDataset(Dataset):
             jitter = 0.2
             hue = 0.1
             saturation = 1.5
-            exposure = 1.8
+            exposure = 2.5
 
             # Get background image path
             random_bg_index = random.randint(0, len(self.bg_file_names) - 1)
