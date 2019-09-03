@@ -108,7 +108,6 @@ class listDataset(Dataset):
             # Save to see the dataset
             import os
             import time
-            import cv2
             def mkdir(path):
                 path = path.strip()
                 path = path.rstrip("/")
@@ -122,7 +121,7 @@ class listDataset(Dataset):
                     return False
             mkdir('debug/1')
             imgpath = 'debug/1/{}.img'.format(time.time())
-            cv2.imwrite(imgpath, img)
+            img.save(imgpath)
             print("{} saved!".format(imgpath))
 
             # Convert the labels to PyTorch variables
