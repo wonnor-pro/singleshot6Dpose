@@ -115,6 +115,7 @@ class listDataset(Dataset):
             makedirs('debug/1')
             imgpath = 'debug/1/{}.img'.format(time.time())
             cv2.imwrite(imgpath, img)
+            print("{} saved!".format(imgpath))
 
             # Convert the labels to PyTorch variables
             label = torch.from_numpy(label)
