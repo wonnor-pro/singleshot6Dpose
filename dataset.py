@@ -96,7 +96,7 @@ class listDataset(Dataset):
             jitter = 0.2
             hue = 0.1
             saturation = 1.5
-            exposure = 1.5
+            exposure = 1.8
 
             # Get background image path
             random_bg_index = random.randint(0, len(self.bg_file_names) - 1)
@@ -119,8 +119,8 @@ class listDataset(Dataset):
                 else:
                     print(path + ' already exist')
                     return False
-            mkdir('debug/1')
-            imgpath = 'debug/1/{}.png'.format(time.time())
+            mkdir('debug/2')
+            imgpath = 'debug/2/{}.png'.format(time.time())
             img.save(imgpath)
             print("{} saved!".format(imgpath))
 
