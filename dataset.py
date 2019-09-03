@@ -109,10 +109,18 @@ class listDataset(Dataset):
             import os
             import time
             import cv2
-            def makedirs(path):
-                if not os.path.exists(path):
+            def mkdir(path):
+                path = path.strip()
+                path = path.rstrip("/")
+                isExists = os.path.exists(path)
+                if not isExists:
                     os.makedirs(path)
-            makedirs('debug/1')
+                    print(path + ' created successfully')
+                    return True
+                else:
+                    print(path + ' already exist')
+                    return False
+            mkdir('debug/1')
             imgpath = 'debug/1/{}.img'.format(time.time())
             cv2.imwrite(imgpath, img)
             print("{} saved!".format(imgpath))
