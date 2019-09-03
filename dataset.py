@@ -88,9 +88,14 @@ class listDataset(Dataset):
 
         if self.train:
             # If you are going to train, decide on how much data augmentation you are going to apply
+            # jitter = 0.2
+            # hue = 0.1
+            # saturation = 1.5
+            # exposure = 1.5
+
             jitter = 0.2
             hue = 0.1
-            saturation = 1.5 
+            saturation = 1.5
             exposure = 1.5
 
             # Get background image path
@@ -99,6 +104,17 @@ class listDataset(Dataset):
 
             # Get the data augmented image and their corresponding labels
             img, label = load_data_detection(imgpath, self.shape, jitter, hue, saturation, exposure, bgpath)
+
+            # Save to see the dataset
+            import os
+            import time
+            import cv2
+            def makedirs(path):
+                if not os.path.exists(path):
+                    os.makedirs(path)
+            makedirs('debug/1')
+            imgpath = 'debug/1/{}.img'.format(time.time())
+            cv2.imwrite(imgpath, img)
 
             # Convert the labels to PyTorch variables
             label = torch.from_numpy(label)
