@@ -105,25 +105,25 @@ class listDataset(Dataset):
             # Get the data augmented image and their corresponding labels
             img, label = load_data_detection(imgpath, self.shape, jitter, hue, saturation, exposure, bgpath)
 
-            if (False):
-                # Save to see the dataset
-                import os
-                import time
-                def mkdir(path):
-                    path = path.strip()
-                    path = path.rstrip("/")
-                    isExists = os.path.exists(path)
-                    if not isExists:
-                        os.makedirs(path)
-                        print(path + ' created successfully')
-                        return True
-                    else:
-                        print(path + ' already exist')
-                        return False
-                mkdir('debug/4')
-                imgpath = 'debug/4/{}.png'.format(time.time())
-                img.save(imgpath)
-                print("{} saved!".format(imgpath))
+
+            # # Save to see the dataset
+            # import os
+            # import time
+            # def mkdir(path):
+            #     path = path.strip()
+            #     path = path.rstrip("/")
+            #     isExists = os.path.exists(path)
+            #     if not isExists:
+            #         os.makedirs(path)
+            #         print(path + ' created successfully')
+            #         return True
+            #     else:
+            #         print(path + ' already exist')
+            #         return False
+            # mkdir('debug/4')
+            # imgpath = 'debug/4/{}.png'.format(time.time())
+            # img.save(imgpath)
+            # print("{} saved!".format(imgpath))
 
             # Convert the labels to PyTorch variables
             label = torch.from_numpy(label)
